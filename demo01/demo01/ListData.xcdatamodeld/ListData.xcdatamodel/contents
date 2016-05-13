@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="14F1713" minimumToolsVersion="Xcode 7.0">
+    <entity name="Groups" representedClassName=".Groups" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="lists" optional="YES" toMany="YES" deletionRule="Deny" destinationEntity="Listings" inverseName="group" inverseEntity="Listings" syncable="YES"/>
+    </entity>
+    <entity name="Listings" representedClassName=".Listings" syncable="YES">
+        <attribute name="created" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="expiry" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="isDone" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="parentKey" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="group" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Groups" inverseName="lists" inverseEntity="Groups" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Groups" positionX="-45" positionY="360" width="128" height="90"/>
+        <element name="Listings" positionX="180" positionY="365" width="128" height="135"/>
+    </elements>
+</model>
