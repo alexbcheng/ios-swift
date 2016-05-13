@@ -119,7 +119,8 @@ class ChildListTableViewController: UITableViewController {
                 cell.itemTextField.text = listings.name
                 cell.parentKey = listings.parentKey
                 cell.isDone = listings.isDone == 1 ? true : false
-                listItems.append(ListItem(id: setIndexPath.row, name: listings.name!, parentKey: listings.parentKey!, isDone: false))
+                cell.createdTS = listings.created!
+                listItems.append(ListItem(id: setIndexPath.row, name: listings.name!, parentKey: listings.parentKey!, isDone: false, createdTS: listings.created!))
             }
         } else {
             let listings = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Listings
@@ -127,7 +128,8 @@ class ChildListTableViewController: UITableViewController {
             cell.itemTextField.text = listings.name
             cell.parentKey = listings.parentKey
             cell.isDone = listings.isDone == 1 ? true : false
-            listItems.append(ListItem(id: indexPath.row, name: listings.name!, parentKey: listings.parentKey!, isDone: false))
+            cell.createdTS = listings.created!
+            listItems.append(ListItem(id: indexPath.row, name: listings.name!, parentKey: listings.parentKey!, isDone: false, createdTS: listings.created!))
         }
         if cell.isDone {
             cell.itemTextField.hidden = true
@@ -204,6 +206,7 @@ class ChildListTableViewController: UITableViewController {
             let selectedCell = sender as! ChildListTableViewCell
             let itemDetailVC = segue.destinationViewController as! ItemDetailViewController
             itemDetailVC.navigationItem.title = selectedCell.itemTextField.text
+            itemDetailVC.dCreatedTS = selectedCell.createdTS
         }
     }
     

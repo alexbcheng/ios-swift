@@ -13,13 +13,14 @@ class ItemDetailViewController: UIViewController {
     
     @IBOutlet weak var label1: UILabel!
     @IBOutlet weak var sLabel: UILabel!
+    var dCreatedTS: NSDate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         label1.text = self.navigationItem.title
         label1.textColor = UIColor.blueColor()
         sLabel.textColor = UIColor.orangeColor()
-        let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: "Sample Item")
+        let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: "\(label1.text!) : \(convDateToStr(dCreatedTS))")
         attributeString.addAttribute(NSStrikethroughStyleAttributeName, value: 2, range: NSMakeRange(0, attributeString.length))
         sLabel.attributedText = attributeString
         // Do any additional setup after loading the view.
@@ -30,7 +31,12 @@ class ItemDetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    func convDateToStr(InDate: NSDate) -> String {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "MM-dd-yyyy HH:mm:ss"
+        return dateFormatter.stringFromDate(InDate)
+    }
+    
     /*
     // MARK: - Navigation
 

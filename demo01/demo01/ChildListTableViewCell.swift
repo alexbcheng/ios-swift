@@ -15,6 +15,7 @@ class ChildListTableViewCell: UITableViewCell, UITextFieldDelegate {
     var isDone = false
     var inEditMode = false
     var originalCenter = CGPoint()
+    var createdTS: NSDate!
     
     override func awakeFromNib() {
         super.awakeFromNib()
