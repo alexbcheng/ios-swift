@@ -20,8 +20,8 @@ class ItemDetailViewController: UIViewController {
         label1.text = self.navigationItem.title
         label1.textColor = UIColor.blueColor()
         sLabel.textColor = UIColor.orangeColor()
-        let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: "\(label1.text!) : \(convDateToStr(dCreatedTS))")
-        attributeString.addAttribute(NSStrikethroughStyleAttributeName, value: 2, range: NSMakeRange(0, attributeString.length))
+        let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: "Created: \(convDateToStr(dCreatedTS))")
+        //attributeString.addAttribute(NSStrikethroughStyleAttributeName, value: 2, range: NSMakeRange(0, attributeString.length))
         sLabel.attributedText = attributeString
         // Do any additional setup after loading the view.
     }
