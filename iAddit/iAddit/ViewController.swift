@@ -26,26 +26,43 @@ class ViewController: UIViewController {
               "leftNum=\(leftNum)\r\n",
             "rightNumStr=\(rightNumStr)\r\n",
             "rightNum=\(rightNum)\r\n",
+            "currNum=\(currNumStr)\r\n",
             "operation=\(operationStr)\r\n")
     }
     
     @IBOutlet weak var txtView: UITextView!
+    let operation = [1000:"=", 1001:"+", 1002:"-", 1003:"*", 1004:"/"]
     var leftNumStr : String = ""
     var rightNumStr: String = ""
     var leftNum = 0.0
     var rightNum = 0.0
     var operationStr = ""
+    var currNumStr = ""
+    var allCleared = true
 
     @IBAction func onPressNumber(sender: UIButton) {
-        let numStr = CInt(sender.tag) < 10 ? "\(sender.tag)" : "."
+        if sender.tag == 10 && currNumStr.containsString(".") {
+            return
+        }
+        var numStr = CInt(sender.tag) < 10 ? "\(sender.tag)" : "."
         if operationStr != "" {
+            if rightNumStr.characters.count == 0 && numStr == "." {
+                numStr = "0."
+            }
             rightNumStr += numStr
         } else {
+            if leftNumStr.characters.count == 0 && numStr == "." {
+                numStr = "0."
+            }
+            if leftNumStr.characters.count != 0 && !allCleared {
+                return
+            }
             leftNumStr += numStr
         }
+        currNumStr += numStr
         txtView.text! += numStr
-        let range = NSMakeRange(txtView.text.characters.count, 0)
-        txtView.scrollRangeToVisible(range)
+        
+        txtView.scrollRangeToVisible(NSMakeRange(txtView.text.characters.count, NSMaxRange(NSMakeRange(txtView.text.characters.count, 0))))
     }
     @IBAction func onPressClear(sender: UIButton) {
         leftNumStr = ""
@@ -54,48 +71,44 @@ class ViewController: UIViewController {
         leftNum = 0.0
         rightNum = 0.0
         operationStr = ""
+        currNumStr = ""
+        allCleared = true
     }
     @IBAction func onPressOperation(sender: UIButton) {
-        
         if sender.tag == 1000 && leftNum != 0 && operationStr != "" {
             rightNum = rightNumStr == "" ? 0 : CDouble(rightNumStr)!
             leftNum = performOperation(operationStr, lNum: leftNum, rNum: rightNum)
-            leftNumStr = "\(leftNum)"
             txtView.text! += "= \r\n \(leftNum)"
-            rightNumStr = ""
             operationStr = ""
+            currNumStr = "\(leftNum)"
+            allCleared = false
         } else {
-            switch sender.tag {
-            case 1001:
-                operationStr = "add"; txtView.text! += "+ \r\n"
-            case 1002:
-                operationStr = "subtract"; txtView.text! += "- \r\n"
-            case 1003:
-                operationStr = "multiply"; txtView.text! += "x \r\n"
-            case 1004:
-                operationStr = "divide"; txtView.text! += "/ \r\n"
-            default:
+            operationStr = operation[sender.tag]!
+            if operationStr == operation[1000] {
+                operationStr = ""
                 return
             }
+            txtView.text! += "\(operationStr) \r\n"
             leftNum = leftNumStr == "" ? 0 : CDouble(leftNumStr)!
             rightNum = rightNumStr == "" ? 0 : CDouble(rightNumStr)!
             leftNum = performOperation(operationStr, lNum: leftNum, rNum: rightNum)
-            leftNumStr = "\(leftNum)"
-            rightNumStr = ""
+            currNumStr = ""
         }
-        let range = NSMakeRange(txtView.text.characters.count, 0)
-        txtView.scrollRangeToVisible(range)
+        leftNumStr = "\(leftNum)"
+        rightNumStr = ""
+        
+        txtView.scrollRangeToVisible(NSMakeRange(txtView.text.characters.count, NSMaxRange(NSMakeRange(txtView.text.characters.count, 0))))
     }
     
     func performOperation(operation: String, lNum: Double, rNum: Double) -> Double {
         switch operation {
-        case "add":
+        case "+":
             return lNum + rNum
-        case "subtract":
+        case "-":
             return lNum - rNum
-        case "multiply":
+        case "*":
             return lNum * (rNum == 0 ? 1 : rNum)
-        case "divide":
+        case "/":
             return lNum / (rNum == 0 ? 1 : rNum)
         default:
             return 0.0

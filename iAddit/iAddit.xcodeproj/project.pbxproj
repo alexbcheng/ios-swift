@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BBDF6FDD1D5198AF001A46D1 /* digital-7.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BBDF6FDC1D5198AF001A46D1 /* digital-7.ttf */; };
+		BBDF6FDF1D519ACA001A46D1 /* Digital Dismay.otf in Resources */ = {isa = PBXBuildFile; fileRef = BBDF6FDE1D519ACA001A46D1 /* Digital Dismay.otf */; };
 		BBF4BDF81D260385003CF6DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF4BDF71D260385003CF6DB /* AppDelegate.swift */; };
 		BBF4BDFA1D260385003CF6DB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF4BDF91D260385003CF6DB /* ViewController.swift */; };
 		BBF4BDFD1D260385003CF6DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBF4BDFB1D260385003CF6DB /* Main.storyboard */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BBDF6FDC1D5198AF001A46D1 /* digital-7.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "digital-7.ttf"; sourceTree = "<group>"; };
+		BBDF6FDE1D519ACA001A46D1 /* Digital Dismay.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Digital Dismay.otf"; sourceTree = "<group>"; };
 		BBF4BDF41D260384003CF6DB /* iAddit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iAddit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBF4BDF71D260385003CF6DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBF4BDF91D260385003CF6DB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -37,9 +41,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BBDF6FDB1D519883001A46D1 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BBDF6FDE1D519ACA001A46D1 /* Digital Dismay.otf */,
+				BBDF6FDC1D5198AF001A46D1 /* digital-7.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		BBF4BDEB1D260384003CF6DB = {
 			isa = PBXGroup;
 			children = (
+				BBDF6FDB1D519883001A46D1 /* Resources */,
 				BBF4BDF61D260385003CF6DB /* iAddit */,
 				BBF4BDF51D260384003CF6DB /* Products */,
 			);
@@ -127,8 +141,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBF4BE051D260385003CF6DB /* LaunchScreen.storyboard in Resources */,
+				BBDF6FDF1D519ACA001A46D1 /* Digital Dismay.otf in Resources */,
 				BBF4BE021D260385003CF6DB /* Assets.xcassets in Resources */,
 				BBF4BDFD1D260385003CF6DB /* Main.storyboard in Resources */,
+				BBDF6FDD1D5198AF001A46D1 /* digital-7.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +309,7 @@
 				BBF4BE0B1D260385003CF6DB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
