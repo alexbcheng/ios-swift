@@ -21,7 +21,7 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func onPressTemp(sender: UIButton) {
+    @IBAction func onPressTemp(_ sender: UIButton) {
         print("leftNumStr=\(leftNumStr)\r\n",
               "leftNum=\(leftNum)\r\n",
             "rightNumStr=\(rightNumStr)\r\n",
@@ -40,21 +40,21 @@ class ViewController: UIViewController {
     var currNumStr = ""
     var allCleared = true
 
-    @IBAction func onPressNumber(sender: UIButton) {
-        if sender.tag == 10 && currNumStr.containsString(".") {
+    @IBAction func onPressNumber(_ sender: UIButton) {
+        if sender.tag == 10 && currNumStr.contains(".") {
             return
         }
         var numStr = CInt(sender.tag) < 10 ? "\(sender.tag)" : "."
         if operationStr != "" {
-            if rightNumStr.characters.count == 0 && numStr == "." {
+            if rightNumStr.count == 0 && numStr == "." {
                 numStr = "0."
             }
             rightNumStr += numStr
         } else {
-            if leftNumStr.characters.count == 0 && numStr == "." {
+            if leftNumStr.count == 0 && numStr == "." {
                 numStr = "0."
             }
-            if leftNumStr.characters.count != 0 && !allCleared {
+            if leftNumStr.count != 0 && !allCleared {
                 return
             }
             leftNumStr += numStr
@@ -62,9 +62,9 @@ class ViewController: UIViewController {
         currNumStr += numStr
         txtView.text! += numStr
         
-        txtView.scrollRangeToVisible(NSMakeRange(txtView.text.characters.count, NSMaxRange(NSMakeRange(txtView.text.characters.count, 0))))
+        txtView.scrollRangeToVisible(NSMakeRange(txtView.text.count, NSMaxRange(NSMakeRange(txtView.text.count, 0))))
     }
-    @IBAction func onPressClear(sender: UIButton) {
+    @IBAction func onPressClear(_ sender: UIButton) {
         leftNumStr = ""
         rightNumStr = ""
         txtView.text = ""
@@ -74,7 +74,7 @@ class ViewController: UIViewController {
         currNumStr = ""
         allCleared = true
     }
-    @IBAction func onPressOperation(sender: UIButton) {
+    @IBAction func onPressOperation(_ sender: UIButton) {
         if sender.tag == 1000 && leftNum != 0 && operationStr != "" {
             rightNum = rightNumStr == "" ? 0 : CDouble(rightNumStr)!
             leftNum = performOperation(operationStr, lNum: leftNum, rNum: rightNum)
@@ -97,10 +97,10 @@ class ViewController: UIViewController {
         leftNumStr = "\(leftNum)"
         rightNumStr = ""
         
-        txtView.scrollRangeToVisible(NSMakeRange(txtView.text.characters.count, NSMaxRange(NSMakeRange(txtView.text.characters.count, 0))))
+        txtView.scrollRangeToVisible(NSMakeRange(txtView.text.count, NSMaxRange(NSMakeRange(txtView.text.count, 0))))
     }
     
-    func performOperation(operation: String, lNum: Double, rNum: Double) -> Double {
+    func performOperation(_ operation: String, lNum: Double, rNum: Double) -> Double {
         switch operation {
         case "+":
             return lNum + rNum
@@ -114,5 +114,16 @@ class ViewController: UIViewController {
             return 0.0
         }
     }
+    
+    @IBAction func onPressNegPos(_ sender: UIButton) {
+        if operationStr != "" {
+            rightNumStr = "\(CDouble(rightNumStr)! * -1)"
+        } else {
+            leftNumStr = "\(CDouble(leftNumStr)! * -1)"
+        }
+        currNumStr = "\(CDouble(currNumStr)! * -1)"
+        //txtView.text! += let tS = String(repeating: "\\b", count: count(currNumStr))
+    }
+    
 }
 
